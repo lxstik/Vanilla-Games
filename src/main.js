@@ -10,6 +10,7 @@ import './scss/styles.scss'
 // Función para cargar la vista principal (home)
 async function cargarVista() {
   const componente = await import('./vistas/ homeVista.js'); // Asegúrate de que esta ruta sea correcta
+  //const componente = await import('./vistas/loginVista') PARA COMPROBAR MODIFICAR LA LINEA PARA QUE MANTENGA RUTA DE ARCHIVO QUE QUIERO VER
   const vista = componente.default;
 
   // Inyectar la vista en el elemento <main>

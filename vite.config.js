@@ -27,8 +27,9 @@ export default {
     outDir: path.resolve(__dirname, 'dist'),
     minify: false, //( Si no se quiere minificar el build) https://vitejs.dev/config/#build-minify (aplica solo a los JS no CSS)
 },
-  server: {
-    /*port: 8080,*/
-    hot: true
-  }
+publicDir: 'assets',
+server: {
+  /* port: 8080, */ // Podemos definir el puerto de salida
+  hot: true
+}
 }
