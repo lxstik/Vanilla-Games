@@ -44,7 +44,7 @@ export const editarPerfil = {
                       id="imagen"
                       type="url"
                       class="form-control"
-                      value="http://imagenavatar.png"
+                      value="http://avatar.jpg"
                     />
                     <div class="invalid-feedback">La URL no es correcta</div>
                   </div>

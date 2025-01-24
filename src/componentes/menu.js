@@ -119,7 +119,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/avatar.svg" alt="" width="25" />
+        <img src="../images/avatar.jpg" alt="" width="25" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
