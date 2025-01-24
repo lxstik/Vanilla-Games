@@ -1,242 +1,118 @@
-export default{
-    template: //html
+export default {
+    template: // html
     `
+      <div class="container">
+        <h1 class="mt-5">Edición de proyecto</h1>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-secondary mt-5">
+            <i class="bi bi-arrow-bar-left" style="font-size: 1em"></i>
+            Volver
+          </button>
+        </div>
+        <form action="" class="form border shadow-sm p-3" novalidate>
+          <div class="row mt-2">
+            <div class="col-12 col-md-4 pt-2 mb-3">
+              <img src=".images/juego.jpg" alt="" class="img-fluid" />
+              <label class="form-label mt-2" for="urlImagen"
+                ><strong>URL imagen: </strong></label
+              >
+              <input
+                id="urlImagen"
+                type="text"
+                class="form-control"
+                value="http://enlaceImagen.com"
+                required
+              />
+              <div class="invalid-feedback">Por favor, ingresa una URL válida.</div>
+            </div>
+
+            <div class="col-12 col-md-8">
+              <!-- Formulario nuevo proyecto -->
+              <label class="form-label" for="nombre"><strong>Nombre: </strong></label>
+              <input
+                required
+                id="nombre"
+                type="text"
+                value="Nombre Autor"
+                class="form-control"
+              />
+              <div class="invalid-feedback">El nombre es obligatorio.</div>
+
+              <!-- Descripcion -->
+              <label class="form-label mt-2" for="descripcion"><strong>Descripción: </strong></label>
+              <textarea
+                id="descripcion"
+                class="form-control"
+                rows="4"
+                required
+              >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sunt? Recusandae labore at voluptatem tempore incidunt distinctio eaque? Est aspernatur laudantium itaque ullam numquam autem dolor quia amet eum consectetur.
+              </textarea>
+              <div class="invalid-feedback">La descripción es obligatoria.</div>
+
+              <!-- Estado -->
+              <label class="form-label mt-2" for="estado"><strong>Estado: </strong></label>
+              <select required id="estado" class="form-control">
+                <option value="">Selecciona un estado</option>
+                <option value="estado">Estado</option>
+                <option value="otro estado">Otro estado</option>
+              </select>
+              <div class="invalid-feedback">Por favor, selecciona un estado.</div>
+
+              <!-- Fecha -->
+              <label class="form-label mt-2" for="fecha"><strong>Fecha: </strong></label>
+              <input id="fecha" type="date" class="form-control" value="12/12/2023" required />
+              <div class="invalid-feedback">Por favor, selecciona una fecha.</div>
+
+              <!-- Enlace al proyecto -->
+              <label class="form-label mt-2" for="enlace"><strong>Enlace: </strong></label>
+              <input
+                id="enlace"
+                type="url"
+                class="form-control"
+                value="http://enlace.com"
+                required
+              />
+              <div class="invalid-feedback">Por favor, ingresa un enlace válido.</div>
+
+              <label class="form-label mt-2" for="repositorio"><strong>Repositorio: </strong></label>
+              <input
+                id="repositorio"
+                type="text"
+                class="form-control"
+                value="user.github.com/123456"
+                required
+              />
+              <div class="invalid-feedback">El repositorio es obligatorio.</div>
+
+              <input
+                type="submit"
+                class="btn btn-success mt-3"
+                value="Subir proyecto"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+  
+    `
+    ,script: () => {
+        console.log('vista registro cargada')
+        // Validación bootstrap
     
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <!-- Bootstrap CSS -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous"
-        />
-
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/yeti/bootstrap.min.css"
-        />
-
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-        />
-
-        <link rel="stylesheet" href="styles.css" />
-
-        <title>Prototipos vanilla games</title>
-    </head>
-    <body class="pt-5" style="overflow-x: hidden; padding-bottom: 100px">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-                <div class="container">
-                    <a class="navbar-brand" href="#"
-                        ><img
-                            src="images/logo.svg"
-                            alt=""
-                            width="30"
-                            height="24"
-                            class="d-inline-block align-text-top"
-                        />
-
-                        Vanilla Games</a
-                    >
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Menú general -->
-                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">TOP5 Proyectos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">A cerca de</a>
-                            </li>
-                        </ul>
-                        <!-- Menú ROL -->
-                        <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">PROYECTOS</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <img src="images/avatar.jpg" alt="" width="25" />
-                                </a>
-                                <!-- Menú usuario -->
-                                <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
-                                    <li class="text-light text-center p-2">
-                                        <p>user@email.com</p>
-                                    </li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li>
-                                        <button
-                                            type="button"
-                                            class="dropdown-item"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"
-                                        >
-                                            Editar perfil
-                                        </button>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Otra acción</a></li>
-                                    <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- VEntana edición perfil -->
-
-            <!-- Modal -->
-            <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
-            <!-- Formulario de edición de perfil -->
-                <form action="">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Edición de perfil
-                                </h1>
-                                <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form border shadow-sm p-3">
-                                    <div class="m-1" style="max-width: 400px">
-                                        <div class="imgPerfil border shadow-sm p-3 mb-3">
-                                            <div
-                                                class="imagen mx-auto mb-1 rounded-circle"
-                                                style="
-                                                    background-image: url(.images/avatar.svg);
-                                                    width: 200px;
-                                                    height: 200px;
-                                                    background-size: cover;
-                                                    background-position: center;
-                                                "
-                                            ></div>
-                                            
-                                            <!-- Imagen de perfil -->
-                                            <label for="imagen" class="form-label mt-3">URL imagen:</label>
-                                            <input
-                                                id="imagen"
-                                                type="url"
-                                                class="form-control"
-                                                value="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png"
-                                            />
-                                        </div>
-
-                                        <div class="">
-                                            
-                                            <!-- Nombre -->
-                                            <label for="nombre" class="form-label">Nombre:</label>
-                                            <input required id="nombre" type="text" class="form-control" />
-                                            
-                                            <!-- Apellidos -->
-                                            <label for="apellidos" class="form-label">Apellidos:</label>
-                                            <input id="apellidos" type="text" class="form-control" />
-                                            
-                                            <!-- Email -->
-                                            <label for="email" class="form-label">Email:</label>
-                                            <input required id="email" type="email" class="form-control" />
-                                            
-                                            <!-- Contraseña -->
-                                            <label for="pass" class="form-label mt-3">Contraseña:</label>
-                                            <input required id="pass" type="password" class="form-control" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Cancelar
-                                </button>
-                                <button type="button" class="btn btn-primary">Guardar cambios</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </header>
-        <main>
-            <div class="container">
-                <h1 class="mt-5">Modal para editar perfil en header</h1>
-                <!-- Button trigger modal -->
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                >
-                    Launch demo modal
-                </button>
-            </div>
-        </main>
-        <footer class="">
-            <nav class="navbar bg-secondary fixed-bottom small">
-                <div class="container">
-                    <a class="navbar-brand" href="http://www.fpllefia.com">
-                        <img
-                            src=".images/logo.svg"
-                            alt="fpllefia"
-                            width="30"
-                            height="24"
-                            class="d-inline-block align-text-top"
-                        />
-                        FPLlefià
-                    </a>
-                    <span class="navbar-text">@Texto de header</span>
-                    <a href="#" class="nav-link">Vínculo header</a>
-                </div>
-            </nav>
-        </footer>
-
-        <!-- Option 1: Bootstrap Bundle with Popper -->
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>
-
-
-    `
+        // Capturamos el formulario en una variable
+        const formulario = document.querySelector('#formRegistro')
+        // Detectamos su evento submit (enviar)
+        formulario.addEventListener('submit', (event) => {
+          // Detenemos el evento enviar (submit)
+            event.preventDefault()
+            event.stopPropagation()
+        // Comprobamos si el formulario no valida
+          if (!formulario.checkValidity()) {
+            // Y añadimos la clase 'was-validate' para que se muestren los mensajes
+            formulario.classList.add('was-validated')
+          }
+        })
+    }
+    
 }
