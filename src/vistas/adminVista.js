@@ -17,9 +17,7 @@ export default {
                     </div>
                 </div>
 
-                <!-- tabla proyectos -->
                 <div class="border border-top-0 p-3">
-                    <!-- buscador -->
                     <div class="row">
                         <div class="d-flex col-12 col-md-6 mb-3">
                             <div class="input-group flex-nowrap">
@@ -40,7 +38,6 @@ export default {
                         </div>
                     </div>
 
-                    <!-- tabla proyectos -->
                     <div class="col-12" style="overflow-x: auto">
                         <table
                             class="table table-hover align-middle mt-3"

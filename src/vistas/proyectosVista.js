@@ -2,49 +2,341 @@ export default {
     template: // html
     `
      <div class="container">
-                <h1 class="mt-5">Nuevo proyecto</h1>
-                <div class="d-flex justify-content-end">
-                    <bottom class="btn btn-outline-secondary mt-5">
-                        <i class="bi bi-arrow-bar-left" style="font-size: 1em"></i>
-                        Volver</bottom
-                    >
-                </div>
-
-                <div class="row mt-2">
-                    <div class="col-12 col-md-4 pt-2 mb-3">
-                        <img src=".images/juego.jpg" alt="" class="img-fluid" />
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <form action="" class="form">
-                            <label class="form-label" for="nombre"><strong>Nombre: </strong></label>
-                            <input id="nombre" type="text" value="Nombre Autor" class="form-control" />
-
-                            <label class="form-label mt-2" for="descripcion"
-                                ><strong>Descripción: </strong></label
-                            >
-                            <textarea id="descripcion" class="form-control" rows="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sunt? Recusandae labore at voluptatem tempore incidunt distinctio eaque? Est aspernatur laudantium itaque ullam numquam autem dolor quia amet eum consectetur.</textarea>
-                            <label class="form-label mt-2" for="estado"><strong>Estado: </strong></label>
-                            <select id="estado" class="form-control">
-                                <option value="estado">estado</option>
-                                <option value="otro estado">otro estado</option>
-                            </select>
-                            <label class="form-label mt-2" for="fecha"><strong>Fecha: </strong></label>
-                            <input id="fecha" type="date" class="form-control" value="12/12/2023"/>
-                            <label class="form-label mt-2" for="nombre"><strong>Enlace: </strong></label>
-                            <input id="enlace" type="text" class="form-control" value="http://enlace.com" />
-                            <label class="form-label mt-2" for="nombre"
-                                ><strong>Repositorio: </strong></label
-                            >
-                            <input id="repositorio" type="text" class="form-control" value="user.github.com/123456" />
-                            <input type="submit" class="btn btn-success mt-3" value="Subir proyecto">
-                        </form>
+                <h1 class="mt-5">Proyectos</h1>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item w-50">
+                                <a class="nav-link active" aria-current="page" href="#"
+                                    >Todos los proyectos</a
+                                >
+                            </li>
+                            <li class="nav-item w-50">
+                                <a class="nav-link" href="#">Mis proyectos</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                
+                <div class="border border-top-0 p-3">
+                    <div class="row">
+                        <div class="col-12 col-sm-4 mb-3">
+                            <button class="btn btn-primary w-100">Subir proyecto</button>
+                        </div>
+                        <div class="d-flex col-12 col-sm-8 mb-3">
+                            <button class="btn btn-secondary me-2">
+                                <i class="bi bi-grid-3x3-gap"></i>
+                            </button>
+                            <button class="btn btn-secondary me-2">
+                                <i class="bi bi-list"></i>
+                            </button>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping"
+                                    ><i class="bi bi-search"></i
+                                ></span>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Buscador"
+                                    aria-label="Username"
+                                    aria-describedby="addon-wrapping"
+                                />
+                                <span class="input-group-text" id="addon-wrapping"
+                                    ><i class="bi bi-x"></i
+                                ></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-none d-xl-block" style="overflow-x: auto">
+                        <table
+                            class="table table-hover align-middle mt-3"
+                            style="min-width: 1000px"
+                        >
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        Nombre <span><i class="bi bi-caret-down"></i></span>
+                                    </th>
+                                    <th>
+                                        Descripción <span><i class="bi bi-caret-up"></i></span>
+                                    </th>
+                                    <th>
+                                        Enlace <span><i class="bi bi-caret-up"></i></span>
+                                    </th>
+                                    <th>Repositorio</th>
+                                    <th>
+                                        Autor <span><i class="bi bi-caret-up"></i></span>
+                                    </th>
+                                    <th>
+                                        Fecha <span><i class="bi bi-caret-up"></i></span>
+                                    </th>
+                                    <th>
+                                        Estado <span><i class="bi bi-caret-up"></i></span>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tr>
+                                <td>
+                                    <div class="containerImagen">
+                                        <img width="200px" src=".images/juego.jpg" alt="" />
+                                    </div>
+                                </td>
+                                <td>Proyecto ejemplo 1</td>
+                                <td>Ejemplo de web para centro fp</td>
+                                <td><a href="http://www.fpllefia.con">http://www.fpllefia.con</a></td>
+                                <td><a href="#">carrebola.github.com/juego1</a></td>
+                                <td>carlos</td>
+                                <td>13/12/2021</td>
+                                <td>?</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="containerImagen">
+                                        <img width="200px" src=".images/juego.jpg" alt="" />
+                                    </div>
+                                </td>
+                                <td>Proyecto ejemplo 1</td>
+                                <td>Ejemplo de web para centro fp</td>
+                                <td><a href="http://www.fpllefia.con">http://www.fpllefia.con</a></td>
+                                <td><a href="#">carrebola.github.com/juego1</a></td>
+                                <td>carlos</td>
+                                <td>13/12/2021</td>
+                                <td>?</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="containerImagen">
+                                        <img width="200px" src=".images/juego.jpg" alt="" />
+                                    </div>
+                                </td>
+                                <td>Proyecto ejemplo 1</td>
+                                <td>Ejemplo de web para centro fp</td>
+                                <td><a href="http://www.fpllefia.con">http://www.fpllefia.con</a></td>
+                                <td><a href="#">carrebola.github.com/juego1</a></td>
+                                <td>carlos</td>
+                                <td>13/12/2021</td>
+                                <td>?</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="d-xl-none row">
+                        <div class="col-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-4"
+                                        style="
+                                            background-image: url(.images/juego.jpg);
+                                            background-position: center;
+                                            background-size: cover;
+                                        "
+                                    ></div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tetris</h5>
+                                            <p class="card-text">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
+                                                quos, quae atque rerum quibusdam
+                                            </p>
+                                            <p class="small m-0 text-end text-italic">Autor: Carlos Arrebola</p>
+                                            <p class="small text-end text-italic">Fecha: 12/12/2023</p>
+
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Enlace</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Repo</a>
+                                            <a class="btn btn-sm btn-success" href="#">Estado</a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+                                            ></a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-4"
+                                        style="
+                                            background-image: url(.images/juego.jpg);
+                                            background-position: center;
+                                            background-size: cover;
+                                        "
+                                    ></div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tetris</h5>
+                                            <p class="card-text">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
+                                                quos, quae atque rerum quibusdam
+                                            </p>
+                                            <p class="small m-0 text-end text-italic">Autor: Carlos Arrebola</p>
+                                            <p class="small text-end text-italic">Fecha: 12/12/2023</p>
+
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Enlace</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Repo</a>
+                                            <a class="btn btn-sm btn-success" href="#">Estado</a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+                                            ></a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-4"
+                                        style="
+                                            background-image: url(.images/juego.jpg);
+                                            background-position: center;
+                                            background-size: cover;
+                                        "
+                                    ></div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tetris</h5>
+                                            <p class="card-text">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
+                                                quos, quae atque rerum quibusdam
+                                            </p>
+                                            <p class="small m-0 text-end text-italic">Autor: Carlos Arrebola</p>
+                                            <p class="small text-end text-italic">Fecha: 12/12/2023</p>
+
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Enlace</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Repo</a>
+                                            <a class="btn btn-sm btn-success" href="#">Estado</a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+                                            ></a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-4"
+                                        style="
+                                            background-image: url(.images/juego.jpg);
+                                            background-position: center;
+                                            background-size: cover;
+                                        "
+                                    ></div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tetris</h5>
+                                            <p class="card-text">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
+                                                quos, quae atque rerum quibusdam
+                                            </p>
+                                            <p class="small m-0 text-end text-italic">Autor: Carlos Arrebola</p>
+                                            <p class="small text-end text-italic">Fecha: 12/12/2023</p>
+
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Enlace</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Repo</a>
+                                            <a class="btn btn-sm btn-success" href="#">Estado</a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+                                            ></a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-4"
+                                        style="
+                                            background-image: url(.images/juego.jpg);
+                                            background-position: center;
+                                            background-size: cover;
+                                        "
+                                    ></div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tetris</h5>
+                                            <p class="card-text">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
+                                                quos, quae atque rerum quibusdam
+                                            </p>
+                                            <p class="small m-0 text-end text-italic">Autor: Carlos Arrebola</p>
+                                            <p class="small text-end text-italic">Fecha: 12/12/2023</p>
+
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Enlace</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Repo</a>
+                                            <a class="btn btn-sm btn-success" href="#">Estado</a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+                                            ></a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div
+                                        class="col-4"
+                                        style="
+                                            background-image: url(.images/juego.jpg);
+                                            background-position: center;
+                                            background-size: cover;
+                                        "
+                                    ></div>
+                                    <div class="col-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Tetris</h5>
+                                            <p class="card-text">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
+                                                quos, quae atque rerum quibusdam
+                                            </p>
+                                            <p class="small m-0 text-end text-italic">Autor: Carlos Arrebola</p>
+                                            <p class="small text-end text-italic">Fecha: 12/12/2023</p>
+
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Enlace</a>
+                                            <a class="btn btn-sm btn-outline-primary" href="#">Repo</a>
+                                            <a class="btn btn-sm btn-success" href="#">Estado</a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+                                            ></a>
+                                            <a
+                                                class="d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
   
     `
   }
-  
-  
-

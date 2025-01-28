@@ -5,14 +5,12 @@ export default {
                 <h1 class="mt-5 text-center">Inicia sesión</h1>
                 <div class="m-5 mx-auto" style="max-width: 400px">
                     <form novalidate action="" class="form border shadow-sm p-3">
-                        <!-- Email -->
                         <label for="email" class="form-label">Email:</label>
                         <input id="email" required type="email" class="form-control" />
                         <div class="invalid-feedback">
                             El formato del email no es correcto
                         </div>
                         
-                        <!-- Contraseña -->
                         <label for="pass" class="form-label mt-3">Contraseña:</label>
                         <input required minlength="6" id="pass" type="password" class="form-control" />
                         <div class="invalid-feedback">
@@ -42,19 +40,11 @@ export default {
   
     `
     ,script: () => {
-        console.log('vista registro cargada')
-        // Validación bootstrap
-    
-        // Capturamos el formulario en una variable
         const formulario = document.querySelector('#formRegistro')
-        // Detectamos su evento submit (enviar)
         formulario.addEventListener('submit', (event) => {
-          // Detenemos el evento enviar (submit)
             event.preventDefault()
             event.stopPropagation()
-        // Comprobamos si el formulario no valida
           if (!formulario.checkValidity()) {
-            // Y añadimos la clase 'was-validate' para que se muestren los mensajes
             formulario.classList.add('was-validated')
           }
         })

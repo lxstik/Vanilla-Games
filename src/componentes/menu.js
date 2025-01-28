@@ -20,32 +20,31 @@ const menuRol = {
   `,
   templateRegistrado: // html
   `
-  <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+  <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
     <li class="nav-item">
-      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">Proyectos</a>
+      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PROYECTOS</a>
     </li>
+    
   </ul>
   `,
   templateDesarrollador: // html
   `
-  <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
     <li class="nav-item">
-      <a class="nav-link router-link" href="#/mis-proyectos">Mis Proyectos</a>
+      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PROYECTOS</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link router-link" href="#/crear-proyecto">Crear Proyecto</a>
-    </li>
-  </ul>
-  `,
+    
+  </ul>`,
   templateAdmin: // html
   `
-  <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
     <li class="nav-item">
-      <a class="nav-link router-link" href="#/gestionar-usuarios">Gestionar Usuarios</a>
+      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PROYECTOS</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link router-link" href="#/configuracion">Configuración</a>
+     <li class="nav-item">
+      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PANEL ADMIN</a>
     </li>
+    
   </ul>
   `
 }
@@ -62,7 +61,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/avatar.svg" alt="" width="25" />
+        <img src="images/Pp.jpg" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -72,7 +71,16 @@ const menuUsuario = {
           ${ls.getUsuario().rol}
         </li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+            <li>
+      <a 
+        class="dropdown-item" 
+        href="#"
+        data-bs-toggle="modal"
+        data-bs-target="#modalEditarPerfil"
+        >
+        Mi perfil
+      </a>
+    </li>
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
       </ul>
@@ -81,7 +89,7 @@ const menuUsuario = {
   `,
   templateDesarrollador: // html
   `
-  <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
+    <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
     <li class="nav-item dropdown">
       <a
         class="nav-link dropdown-toggle"
@@ -90,7 +98,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/avatar.svg" alt="" width="25" />
+        <img src="images/Pp.jpg" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -100,17 +108,27 @@ const menuUsuario = {
           ${ls.getUsuario().rol}
         </li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">Mi perfil</a></li>
-        <li><a class="dropdown-item" href="#/crear-proyecto">Crear Proyecto</a></li>
+            <li>
+      <a 
+        class="dropdown-item" 
+        href="#"
+        data-bs-toggle="modal"
+        data-bs-target="#modalEditarPerfil"
+        >
+        Mi perfil
+      </a>
+    </li>
+
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
       </ul>
     </li>
   </ul>
+  
   `,
   templateAdmin: // html
   `
-  <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
+   <ul class="navbar-nav ms-auto me-2 mb-2 mb-lg-0">
     <li class="nav-item dropdown">
       <a
         class="nav-link dropdown-toggle"
@@ -119,7 +137,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="../images/avatar.jpg" alt="" width="25" />
+        <img src="images/Pp.jpg" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -129,13 +147,25 @@ const menuUsuario = {
           ${ls.getUsuario().rol}
         </li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#/gestionar-usuarios">Gestionar Usuarios</a></li>
-        <li><a class="dropdown-item" href="#/configuracion">Configuración</a></li>
+            <li>
+      <a 
+        class="dropdown-item" 
+        href="#"
+        data-bs-toggle="modal"
+        data-bs-target="#modalEditarPerfil"
+        >
+        Mi perfil
+      </a>
+    </li>
+
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
       </ul>
     </li>
   </ul>
+  
+  
+  
   `
 }
 
