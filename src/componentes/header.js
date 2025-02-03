@@ -1,17 +1,22 @@
-// Importamos la función ls del archivo funciones
-import { ls } from '../componentes/funciones.js';
+
+import { ls } from "../componentes/funciones.js";
+import { menuRol, menuUsuario } from "./menu.js";
+import { editarPerfil } from './editarPerfil.js';
+
 export const header = {
+  // html
   template: `
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#/home"
+    <a class="navbar-brand router-link" href="#/home"
       ><img
-        src="images/logo.svg"
+        src="/images/logo.svg"
         alt=""
         width="30"
         height="24"
         class="d-inline-block align-text-top"
       />
+
       Vanilla Games</a
     >
     <button
@@ -26,44 +31,52 @@ export const header = {
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
-      <!-- Menu común para todos los usuarios -->
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#/home">Home</a>
+          <a class="nav-link router-link" aria-current="page" href="#/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">TOP5 Proyectos</a>
+          <a class="nav-link router-link" aria-current="page" href="#/proyectos">TOP5 Proyectos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">A cerca de</a>
+          <a class="nav-link router-link" aria-current="page" href="#/adminVista">A cerca de</a>
         </li>
       </ul>
 
-      <!-- Aquí va el Menu rol -->
       <div id="menuRol"></div>
-    
-      <!-- Aquí va el Menu usuario -->
       <div id="menuUsuario"></div>
-    
+       <div id="modal"> </div>
     </div>
   </div>
 </nav>
+
   `,
 
   script: () => {
-    console.log('Header cargado')
-    // Simulamos el inicio de sesión de un usuario
-    const usuario = {
-      email: 'DavidHenrique@email.com',
-      rol: 'alumno'
+    console.log("Header cargado");
+    document.querySelector('#modal').innerHTML = editarPerfil.template
+    const rolUsuario = ls.getUsuario().rol;
+    switch (rolUsuario) {
+      case "registrado":
+        document.querySelector("#menuRol").innerHTML =
+          menuRol.templateRegistrado;
+        document.querySelector("#menuUsuario").innerHTML =
+          menuUsuario.templateRegistrado;
+        break;
+      case "desarrollador":
+        document.querySelector("#menuRol").innerHTML =
+          menuRol.templateDesarrollador;
+        document.querySelector("#menuUsuario").innerHTML =
+          menuUsuario.templateDesarrollador;
+        break;
+      case "admin":
+        document.querySelector("#menuRol").innerHTML = menuRol.templateAdmin;
+        document.querySelector("#menuUsuario").innerHTML =
+        menuUsuario.templateAdmin;
+        break;
+      default:
+        document.querySelector("#menuRol").innerHTML = menuRol.templateAnonimo;
+        break;
     }
-    ls.setUsuario(usuario)
-    console.log('usuario guardado')
-
-    // Leemos el usuario del localstorage
-    const usuarioLogueado = ls.getUsuario()
-    console.log('usuario del localstorage: ', usuarioLogueado)
-  }
-
+  },
 };
