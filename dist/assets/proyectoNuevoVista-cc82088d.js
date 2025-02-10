@@ -13,7 +13,7 @@ const proyectoNuevoVista = {
 
                 <div class="row mt-2">
                     <div class="col-12 col-md-4 pt-2 mb-3">
-                        <img src=".images/juego.jpg" alt="" class="img-fluid" />
+                        <img src="../images/juego.jpg" alt="" class="img-fluid" />
                     </div>
                     <div class="col-12 col-md-8">
                         <form action="" class="form">
