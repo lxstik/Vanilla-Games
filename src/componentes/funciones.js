@@ -16,4 +16,4 @@ export const ls = {
     localStorage.setItem("usuarioVanilla", usuarioJSON);
   },
 };
-ls.setUsuario({ email: "chafardera@gmial.com", rol: "admin" });
+ls.setUsuario({ email: "fal@gmial.com", rol: "admin" });
