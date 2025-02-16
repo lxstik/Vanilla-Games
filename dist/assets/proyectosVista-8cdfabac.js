@@ -82,7 +82,7 @@ const proyectosVista = {
                             <tr>
                                 <td>
                                     <div class="containerImagen">
-                                        <img width="200px" src=".images/juego.jpg" alt="" />
+                                        <img width="200px" src="../images/juego.jpg" alt="" />
                                     </div>
                                 </td>
                                 <td>Proyecto ejemplo 1</td>
@@ -96,7 +96,7 @@ const proyectosVista = {
                             <tr>
                                 <td>
                                     <div class="containerImagen">
-                                        <img width="200px" src="./.images/juego.jpg" alt="" />
+                                        <img width="200px" src="../images/juego.jpg" alt="" />
                                     </div>
                                 </td>
                                 <td>Proyecto ejemplo 1</td>
@@ -131,7 +131,7 @@ const proyectosVista = {
                                     <div
                                         class="col-4"
                                         style="
-                                            background-image: url(.images/juego.jpg);
+                                            background-image: url(../images/juego.jpg);
                                             background-position: center;
                                             background-size: cover;
                                         "
@@ -166,7 +166,7 @@ const proyectosVista = {
                                     <div
                                         class="col-4"
                                         style="
-                                            background-image: url(.images/juego.jpg);
+                                            background-image: url(../images/juego.jpg);
                                             background-position: center;
                                             background-size: cover;
                                         "
@@ -201,7 +201,7 @@ const proyectosVista = {
                                     <div
                                         class="col-4"
                                         style="
-                                            background-image: url(.images/juego.jpg);
+                                            background-image: url(../images/juego.jpg);
                                             background-position: center;
                                             background-size: cover;
                                         "
@@ -236,7 +236,7 @@ const proyectosVista = {
                                     <div
                                         class="col-4"
                                         style="
-                                            background-image: url(.images/juego.jpg);
+                                            background-image: url(../images/juego.jpg);
                                             background-position: center;
                                             background-size: cover;
                                         "
@@ -271,7 +271,7 @@ const proyectosVista = {
                                     <div
                                         class="col-4"
                                         style="
-                                            background-image: url(.images/juego.jpg);
+                                            background-image: url(../images/juego.jpg);
                                             background-position: center;
                                             background-size: cover;
                                         "
@@ -306,7 +306,7 @@ const proyectosVista = {
                                     <div
                                         class="col-4"
                                         style="
-                                            background-image: url(.images/juego.jpg);
+                                            background-image: url(../images/juego.jpg);
                                             background-position: center;
                                             background-size: cover;
                                         "
