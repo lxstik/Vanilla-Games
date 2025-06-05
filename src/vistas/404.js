@@ -1,6 +1,5 @@
 export default {
-    template: //html
-    `
-    <h1>ERROR</h1>
-    `
-}
+    template: `
+    Error 404: Página no encontrada`,
+
+  };

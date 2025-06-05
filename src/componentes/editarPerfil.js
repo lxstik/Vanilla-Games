@@ -1,18 +1,19 @@
-export const editarPerfil = {
-  template: // html
-  `
-  <div
-   <div
-  class="modal fade"
-  id="modalEditarPerfil"
-  data-bs-backdrop="false"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+import { ls } from "../componentes/funciones";
+import { User } from "../../bd/user";
 
+export const editarPerfil = {
+  // html
+  template: `
+  <!-- Ventana modaledición perfil -->
+  <div
+    class="modal fade"
+    id="modalEditarPerfil"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
   >
-    <form novalidate action="">
+    <!-- Formulario de edición de perfil -->
+    <form novalidate id="formularioEditarPerfil" action="">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -33,7 +34,7 @@ export const editarPerfil = {
                   <div
                     class="imagen mx-auto mb-1 rounded-circle"
                     style="
-                      background-image: url(.images/avatar.svg);
+                      background-image: url(${ls.getUsuario().avatar});
                       width: 200px;
                       height: 200px;
                       background-size: cover;
@@ -41,32 +42,42 @@ export const editarPerfil = {
                     "
                   ></div>
 
+                  <!-- Imagen de perfil -->
                   <label for="imagen" class="form-label mt-3">URL imagen:</label>
                   <input
-                    id="imagen"
+                    id="avatar"
                     type="url"
                     class="form-control"
-                    value="http://imagenavatar.png"
+                    value="${ls.getUsuario().avatar}"
                   />
                   <div class="invalid-feedback">La url no es correcta</div>
                 </div>
 
                 <div class="">
-                  <label for="nombre" class="form-label">Nombre:</label>
-                  <input required id="nombre" type="text" class="form-control" />
+                  <!-- Nombre -->
+                  <label for="nombrePerfil" class="form-label">Nombre:</label>
+                  <input required id="nombrePerfil" type="text" class="form-control" value="${
+                    ls.getUsuario().nombre
+                  }" />
                   <div class="invalid-feedback">El nombre es requerido</div>
-                  <label for="apellidos" class="form-label">Apellidos:</label>
-                  <input id="apellidos" type="text" class="form-control" />
+                  <!-- Apellidos -->
+                  <label for="apellidosPerfil" class="form-label">Apellidos:</label>
+                  <input id="apellidosPerfil" type="text" class="form-control" value="${
+                    ls.getUsuario().apellidos
+                  }" />
 
-                  <label for="email" class="form-label">Email:</label>
-                  <input required id="email" type="email" class="form-control" />
+                  <!-- Email -->
+                  <label for="emailPerfil" class="form-label">Email:</label>
+                  <input required id="emailPerfil" type="email" class="form-control" value="${
+                    ls.getUsuario().email
+                  }" />
                   <div class="invalid-feedback">El formato no es correcto</div>
 
-                  <label for="pass" class="form-label mt-3">Contraseña:</label>
+                  <!-- Contraseña -->
+                  <label for="passPerfil" class="form-label mt-3">Nueva contraseña:</label>
                   <input
-                    required
                     minlength="6"
-                    id="pass"
+                    id="passPerfil"
                     type="password"
                     class="form-control"
                   />
@@ -81,7 +92,9 @@ export const editarPerfil = {
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Cancelar
             </button>
-            <button type="button" class="btn btn-primary">Guardar cambios</button>
+            <button id="enviarPerfilEditado" data-id="${
+              ls.getUsuario().user_id
+            }" type="submit" class="btn btn-primary">Guardar cambios</button>
           </div>
         </div>
       </div>
@@ -89,6 +102,50 @@ export const editarPerfil = {
   </div>
   `,
   script: () => {
-    console.log('script de modal editar perfil cargado')
-  }
-}
+    console.log("script editar perfil cargado");
+    // Validación bootstrap
+    // Capturamos el formulario en una variable
+    const formulario = document.querySelector("#formularioEditarPerfil");
+    // Detectamos su evento submit (enviar)
+    formulario.addEventListener("submit", (event) => {
+      // Comprobamos si el formulario no valida
+      // Detenemos el evento enviar (submit)
+      event.preventDefault();
+      event.stopPropagation();
+      if (!formulario.checkValidity()) {
+        // formulario no valida
+      } else {
+        //* ** ENVIAMOS DATOS A LA BASE DE DATOS */
+        enviaDatos();
+      }
+      // Y añadimos la clase 'was-validate' para que se muestren los mensajes
+      formulario.classList.add("was-validated");
+    });
+
+    // Función para enviar datos a la base de datos
+    function enviaDatos() {
+      const usuario = ls.getUsuario();
+      const perfilEditado = {
+        user_id: usuario.user_id,
+        avatar: document.querySelector("#avatar").value,
+        nombre: document.querySelector("#nombrePerfil").value,
+        apellidos: document.querySelector("#apellidosPerfil").value,
+        email: document.querySelector("#emailPerfil").value,
+        contraseña:
+          document.querySelector("#passPerfil").value || usuario.contraseña,
+      };
+
+      // Actualizamos el usuario en la base de datos
+      User.update(perfilEditado);
+
+      // Actualizamos el localStorage
+      ls.setUsuario(perfilEditado);
+
+      // Cerramos el modal
+      const modal = bootstrap.Modal.getInstance(
+        document.querySelector("#modalEditarPerfil")
+      );
+      modal.hide();
+    }
+  },
+};
