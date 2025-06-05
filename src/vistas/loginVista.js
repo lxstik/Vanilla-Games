@@ -87,19 +87,22 @@ async function enviarDatos(formulario) {
     console.log('Perfil logueado:', perfilLogueado);
 
     // 6️⃣ Almacenar datos del usuario en localStorage con rol por defecto "registrado"
-    const usuario = {
-      email: usuarioLogueado.email,
-      rol: perfilLogueado?.rol || "registrado",  // 🔹 Si no hay rol, asigna "registrado"
-      avatar: perfilLogueado?.avatar || "default.png"
-    };
-    console.log('Perfil localStorage:', usuario);
-    ls.setUsuario(usuario);
+// Reemplaza esta parte en tu loginVista.js:
+const usuario = {
+  user_id: usuarioLogueado.id,  // <--- esto faltaba
+  email: usuarioLogueado.email,
+  rol: perfilLogueado?.rol || "registrado",
+  avatar: perfilLogueado?.avatar || "default.png"
+};
+ls.setUsuario(usuario);
 
-    // 7️⃣ Redireccionar a la página de proyectos
+
+    // 7️⃣ Actualizar el header ANTES de redirigir para que refleje el nuevo usuario
+    await header.script();
+
+    // 8️⃣ Redireccionar a la página de proyectos
     window.location = '#/proyectos';
 
-    // 8️⃣ Actualizar el header según el rol
-    header.script();
   } catch (error) {
     console.error('Error al iniciar sesión:', error.message);
     alert('El usuario no existe o la contraseña es incorrecta');

@@ -1,102 +1,89 @@
-import { Proyecto } from "../../bd/proyecto";
-import {User} from "../../bd/user"
+import { Proyecto } from "../../bd/proyecto.js";
+import { ls } from "../componentes/funciones.js";
 
 export default {
   template: `
-  <div class="container">
-    <h1 class="mt-5">Nuevo proyecto</h1>
-    <div class="d-flex justify-content-end">
-      <button id="botonVolver" class="btn btn-outline-secondary mt-5 bi bi-arrow-bar-left">
-        Volver
-      </button>
-    </div>
-
-    <div class="row mt-2">
-      <div class="col-12 col-md-4 pt-2 mb-3">
-        <img src="#" alt="" class="img-fluid" />
-        <label class="form-label mt-2" for="urlImagen"><strong>URL imagen: </strong></label>
-        <input id="urlImagen" type="text" class="form-control" value="http://enlaceImagen.com" />
-      </div>
-      <div class="col-12 col-md-8">
-        <!-- Formulario nuevo proyecto -->
-        <form id="formularioNuevoProyecto" action="" class="form" novalidate>
-          <!-- Nombre proyecto -->
-          <label class="form-label" for="nombreJuego"><strong>Nombre: </strong></label>
-          <input required id="nombreJuego" type="text" class="form-control" placeholder="Escribe aquí el nombre del juego" />
-          <!-- Descripción -->
-          <label class="form-label mt-2" for="descripcion"><strong>Descripción: </strong></label>
-          <textarea id="descripcion" class="form-control" rows="4" placeholder="Descripción del juego"></textarea>
-          <!-- Estado -->
-          <label class="form-label mt-2" for="estado"><strong>Estado: </strong></label>
-          <select required id="estado" class="form-control">
-            <option value="En desarrollo">En desarrollo</option>
-            <option value="Cerrado">Cerrado</option>
+    <div class="container mt-5">
+      <h2>Subir nuevo proyecto</h2>
+      <form id="formProyectoNuevo" novalidate>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" class="form-control" required />
+          <div class="invalid-feedback">El nombre es obligatorio.</div>
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+          <div class="invalid-feedback">La descripción es obligatoria.</div>
+        </div>
+        <div class="mb-3">
+          <label for="imagen" class="form-label">URL Imagen</label>
+          <input type="text" id="imagen" class="form-control" placeholder="Opcional"/>
+        </div>
+        <div class="mb-3">
+          <label for="enlace" class="form-label">Enlace</label>
+          <input type="url" id="enlace" class="form-control" placeholder="https://..." />
+        </div>
+        <div class="mb-3">
+          <label for="repositorio" class="form-label">Repositorio</label>
+          <input type="url" id="repositorio" class="form-control" placeholder="https://..." />
+        </div>
+        <div class="mb-3">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" class="form-select">
+            <option value="activo" selected>Activo</option>
+            <option value="inactivo">Inactivo</option>
           </select>
-          <!-- Fecha -->
-          <label class="form-label mt-2" for="fecha"><strong>Fecha: </strong></label>
-          <input id="fecha" type="date" class="form-control" value="${
-            new Date().toISOString().split("T")[0]
-          }" />
-          <!-- Enlace al proyecto -->
-          <label class="form-label mt-2" for="enlace"><strong>Enlace: </strong></label>
-          <input id="enlace" type="url" class="form-control" value="http://enlace.com" />
-          <!-- Repositorio -->
-          <label class="form-label mt-2" for="repositorio"><strong>Repositorio: </strong></label>
-          <input id="repositorio" type="text" class="form-control" value="user.github.com/123456" />
-          <!-- Submit -->
-          <input type="submit" class="btn btn-success mt-3" value="Subir proyecto" />
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear proyecto</button>
+      </form>
     </div>
-  </div>
   `,
   script: () => {
-    // Botón volver atrás: previene propagación
-    document
-      .querySelector("#botonVolver")
-      .addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        event.stopImmediatePropagation();
-        window.history.back();
-      });
+    const form = document.getElementById("formProyectoNuevo");
 
-    // Validación bootstrap: Listener del formulario con detención de propagación
-    const formulario = document.querySelector("#formularioNuevoProyecto");
-    formulario.addEventListener("submit", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-      if (!formulario.checkValidity()) {
-        formulario.classList.add("was-validated");
-      } else {
-        enviaDatos();
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
       }
-    });
 
-    // Función para enviar datos a la base de datos
-    async function enviaDatos() {
+      const usuario = ls.getUsuario();
+      console.log("Usuario desde localStorage:", usuario);  // <-- Aquí chequeamos qué usuario hay
+
+      if (!usuario || !usuario.user_id) {
+        alert("Debe iniciar sesión para crear un proyecto.");
+        window.location = "#/login";
+        return;
+      }
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const descripcion = document.getElementById("descripcion").value.trim();
+      const imagen = document.getElementById("imagen").value.trim() || "images/imagenVacia.png";
+      const enlace = document.getElementById("enlace").value.trim();
+      const repositorio = document.getElementById("repositorio").value.trim();
+      const estado = document.getElementById("estado").value;
+
+      const nuevoProyecto = {
+        user_id: usuario.user_id,
+        nombre,
+        descripcion,
+        imagen,
+        enlace,
+        repositorio,
+        estado,
+      };
+
       try {
-        const user = await User.getUser();
-        const userId = user.id;
-        const proyectoEditado = {
-          imagen: document.querySelector("#urlImagen").value,
-          nombre: document.querySelector("#nombreJuego").value,
-          descripcion: document.querySelector("#descripcion").value,
-          created_at: document.querySelector("#fecha").value,
-          estado: document.querySelector("#estado").value,
-          enlace: document.querySelector("#enlace").value,
-          repositorio: document.querySelector("#repositorio").value,
-          user_id: userId,
-        };
-        const proyectoCreado = await Proyecto.create(proyectoEditado);
-        alert("Proyecto creado con éxito: " + proyectoCreado.nombre);
-        console.log("Enviando a la base de datos ", proyectoCreado);
+        await Proyecto.create(nuevoProyecto);
+        alert("Proyecto creado con éxito!");
         window.location = "#/proyectos";
       } catch (error) {
         alert("Error al crear el proyecto: " + error.message);
       }
-    }
+    });
   },
 };
