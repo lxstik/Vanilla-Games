@@ -1,4 +1,4 @@
-import { ls } from './funciones'
+import { ls } from './funciones.js'
 
 const menuRol = {
   templateAnonimo: // html
@@ -42,7 +42,7 @@ const menuRol = {
       <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PROYECTOS</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PANEL ADMIN</a>
+      <a class="nav-link active router-link" aria-current="page" href="#/admin">PANEL ADMIN</a>
     </li>
     
   </ul>
@@ -61,7 +61,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/Pp.jpg" alt="" width="40" />
+        <img src="${ls.getUsuario().avatar}" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -82,7 +82,7 @@ const menuUsuario = {
       </a>
     </li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+        <li><a class="dropdown-item cerrarSesion" href="#">Cerrar sesión</a></li>
       </ul>
     </li>
   </ul>
@@ -98,7 +98,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/Pp.jpg" alt="" width="40" />
+        <img src="${ls.getUsuario().avatar}" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -120,7 +120,7 @@ const menuUsuario = {
     </li>
 
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+        <li><a class="dropdown-item cerrarSesion" href="#">Cerrar sesión</a></li>
       </ul>
     </li>
   </ul>
@@ -137,7 +137,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/Pp.jpg" alt="" width="40" />
+        <img src="${ls.getUsuario().avatar}" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -159,7 +159,7 @@ const menuUsuario = {
     </li>
 
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+       <li><a class="dropdown-item cerrarSesion cerrarSesion" href="#">Cerrar sesión</a></li>
       </ul>
     </li>
   </ul>

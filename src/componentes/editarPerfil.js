@@ -1,18 +1,18 @@
-export const editarPerfil = {
-  template: // html
-  `
-  <div
-   <div
-  class="modal fade"
-  id="modalEditarPerfil"
-  data-bs-backdrop="false"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+// Importación necesaria para manejar el modal de Bootstrap
+import { Modal } from "bootstrap";
+import { ls } from "../componentes/funciones";
+import { User } from "../../bd/user";
 
+export const editarPerfil = {
+  template: `
+  <div
+    class="modal fade"
+    id="modalEditarPerfil"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
   >
-    <form novalidate action="">
+    <form novalidate id="formularioEditarPerfil" action="">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -33,7 +33,7 @@ export const editarPerfil = {
                   <div
                     class="imagen mx-auto mb-1 rounded-circle"
                     style="
-                      background-image: url(.images/avatar.svg);
+                      background-image: url(${ls.getUsuario().avatar || 'default_imagen.png'});
                       width: 200px;
                       height: 200px;
                       background-size: cover;
@@ -41,34 +41,41 @@ export const editarPerfil = {
                     "
                   ></div>
 
-                  <label for="imagen" class="form-label mt-3">URL imagen:</label>
+                  <label for="avatar" class="form-label mt-3">URL imagen:</label>
                   <input
-                    id="imagen"
+                    id="avatar"
                     type="url"
                     class="form-control"
-                    value="http://imagenavatar.png"
+                    value="${ls.getUsuario().avatar || ''}"
                   />
                   <div class="invalid-feedback">La url no es correcta</div>
                 </div>
 
-                <div class="">
-                  <label for="nombre" class="form-label">Nombre:</label>
-                  <input required id="nombre" type="text" class="form-control" />
+                <div>
+                  <label for="nombrePerfil" class="form-label">Nombre:</label>
+                  <input required id="nombrePerfil" type="text" class="form-control" value="${
+                    ls.getUsuario().nombre || ''
+                  }" />
                   <div class="invalid-feedback">El nombre es requerido</div>
-                  <label for="apellidos" class="form-label">Apellidos:</label>
-                  <input id="apellidos" type="text" class="form-control" />
 
-                  <label for="email" class="form-label">Email:</label>
-                  <input required id="email" type="email" class="form-control" />
+                  <label for="apellidosPerfil" class="form-label">Apellidos:</label>
+                  <input id="apellidosPerfil" type="text" class="form-control" value="${
+                    ls.getUsuario().apellidos || ''
+                  }" />
+
+                  <label for="emailPerfil" class="form-label">Email:</label>
+                  <input required id="emailPerfil" type="email" class="form-control" value="${
+                    ls.getUsuario().email || ''
+                  }" />
                   <div class="invalid-feedback">El formato no es correcto</div>
 
-                  <label for="pass" class="form-label mt-3">Contraseña:</label>
+                  <label for="passPerfil" class="form-label mt-3">Nueva contraseña:</label>
                   <input
-                    required
                     minlength="6"
-                    id="pass"
+                    id="passPerfil"
                     type="password"
                     class="form-control"
+                    placeholder="Dejar en blanco para no cambiar"
                   />
                   <div class="invalid-feedback">
                     La contraseña debe ser de 6 caracteres como mínimo
@@ -81,14 +88,64 @@ export const editarPerfil = {
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Cancelar
             </button>
-            <button type="button" class="btn btn-primary">Guardar cambios</button>
+            <button id="enviarPerfilEditado" type="submit" class="btn btn-primary">Guardar cambios</button>
           </div>
         </div>
       </div>
     </form>
   </div>
   `,
+
   script: () => {
-    console.log('script de modal editar perfil cargado')
-  }
-}
+    console.log("script editar perfil cargado");
+
+    const formulario = document.querySelector("#formularioEditarPerfil");
+    formulario.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!formulario.checkValidity()) {
+        // Formulario inválido, no hacemos nada
+      } else {
+        await enviaDatos();
+      }
+      formulario.classList.add("was-validated");
+    });
+
+    async function enviaDatos() {
+      const usuario = ls.getUsuario();
+
+      const nuevaPass = document.querySelector("#passPerfil").value;
+
+      const perfilEditado = {
+        user_id: usuario.user_id,
+        avatar: document.querySelector("#avatar").value.trim(),
+        nombre: document.querySelector("#nombrePerfil").value.trim(),
+        apellidos: document.querySelector("#apellidosPerfil").value.trim(),
+        email: document.querySelector("#emailPerfil").value.trim(),
+      };
+
+      if (nuevaPass.length > 0) {
+        if (nuevaPass.length < 6) {
+          alert("La nueva contraseña debe tener al menos 6 caracteres.");
+          return;
+        }
+        perfilEditado.contraseña = nuevaPass;
+      }
+
+      try {
+        // Actualizamos en BD
+        await User.update(perfilEditado);
+        // Actualizamos localStorage
+        ls.setUsuario({ ...usuario, ...perfilEditado });
+
+        // Cerramos modal con instancia de Modal importada
+        const modalEl = document.querySelector("#modalEditarPerfil");
+        const modal = Modal.getInstance(modalEl) || new Modal(modalEl);
+        modal.hide();
+      } catch (error) {
+        alert("Error al actualizar el perfil: " + error.message);
+      }
+    }
+  },
+};

@@ -1,47 +1,89 @@
+import { Proyecto } from "../../bd/proyecto.js";
+import { ls } from "../componentes/funciones.js";
+
 export default {
-    template: // html
-    `
-     <div class="container">
-                <h1 class="mt-5">Nuevo proyecto</h1>
-                <div class="d-flex justify-content-end">
-                    <bottom class="btn btn-outline-secondary mt-5">
-                        <i class="bi bi-arrow-bar-left" style="font-size: 1em"></i>
-                        Volver</bottom
-                    >
-                </div>
+  template: `
+    <div class="container mt-5">
+      <h2>Subir nuevo proyecto</h2>
+      <form id="formProyectoNuevo" novalidate>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" class="form-control" required />
+          <div class="invalid-feedback">El nombre es obligatorio.</div>
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+          <div class="invalid-feedback">La descripción es obligatoria.</div>
+        </div>
+        <div class="mb-3">
+          <label for="imagen" class="form-label">URL Imagen</label>
+          <input type="text" id="imagen" class="form-control" placeholder="Opcional"/>
+        </div>
+        <div class="mb-3">
+          <label for="enlace" class="form-label">Enlace</label>
+          <input type="url" id="enlace" class="form-control" placeholder="https://..." />
+        </div>
+        <div class="mb-3">
+          <label for="repositorio" class="form-label">Repositorio</label>
+          <input type="url" id="repositorio" class="form-control" placeholder="https://..." />
+        </div>
+        <div class="mb-3">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" class="form-select">
+            <option value="activo" selected>Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear proyecto</button>
+      </form>
+    </div>
+  `,
+  script: () => {
+    const form = document.getElementById("formProyectoNuevo");
 
-                <div class="row mt-2">
-                    <div class="col-12 col-md-4 pt-2 mb-3">
-                        <img src=".images/juego.jpg" alt="" class="img-fluid" />
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <form action="" class="form">
-                            <label class="form-label" for="nombre"><strong>Nombre: </strong></label>
-                            <input id="nombre" type="text" value="Nombre Autor" class="form-control" />
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-                            <label class="form-label mt-2" for="descripcion"
-                                ><strong>Descripción: </strong></label
-                            >
-                            <textarea id="descripcion" class="form-control" rows="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sunt? Recusandae labore at voluptatem tempore incidunt distinctio eaque? Est aspernatur laudantium itaque ullam numquam autem dolor quia amet eum consectetur.</textarea>
-                            <label class="form-label mt-2" for="estado"><strong>Estado: </strong></label>
-                            <select id="estado" class="form-control">
-                                <option value="estado">estado</option>
-                                <option value="otro estado">otro estado</option>
-                            </select>
-                            <label class="form-label mt-2" for="fecha"><strong>Fecha: </strong></label>
-                            <input id="fecha" type="date" class="form-control" value="12/12/2023"/>
-                            <label class="form-label mt-2" for="nombre"><strong>Enlace: </strong></label>
-                            <input id="enlace" type="text" class="form-control" value="http://enlace.com" />
-                            <label class="form-label mt-2" for="nombre"
-                                ><strong>Repositorio: </strong></label
-                            >
-                            <input id="repositorio" type="text" class="form-control" value="user.github.com/123456" />
-                            <input type="submit" class="btn btn-success mt-3" value="Subir proyecto">
-                        </form>
-                    </div>
-                </div>
-                
-            </div>
-  
-    `
-  }
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+      }
+
+      const usuario = ls.getUsuario();
+      console.log("Usuario desde localStorage:", usuario);  // <-- Aquí chequeamos qué usuario hay
+
+      if (!usuario || !usuario.user_id) {
+        alert("Debe iniciar sesión para crear un proyecto.");
+        window.location = "#/login";
+        return;
+      }
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const descripcion = document.getElementById("descripcion").value.trim();
+      const imagen = document.getElementById("imagen").value.trim() || "images/imagenVacia.png";
+      const enlace = document.getElementById("enlace").value.trim();
+      const repositorio = document.getElementById("repositorio").value.trim();
+      const estado = document.getElementById("estado").value;
+
+      const nuevoProyecto = {
+        user_id: usuario.user_id,
+        nombre,
+        descripcion,
+        imagen,
+        enlace,
+        repositorio,
+        estado,
+      };
+
+      try {
+        await Proyecto.create(nuevoProyecto);
+        alert("Proyecto creado con éxito!");
+        window.location = "#/proyectos";
+      } catch (error) {
+        alert("Error al crear el proyecto: " + error.message);
+      }
+    });
+  },
+};
